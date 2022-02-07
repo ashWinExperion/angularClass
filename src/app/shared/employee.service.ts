@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import {Employee} from './employee';
+import {DepartmentCls} from './departmentCls'
 
 
 @Injectable({
@@ -11,6 +12,7 @@ import {Employee} from './employee';
 export class EmployeeService {
 
   employess:Employee[];
+  departments:DepartmentCls[];
   formData: Employee=new Employee();
   constructor(private httpClient:HttpClient) { }
 
@@ -22,7 +24,7 @@ export class EmployeeService {
   delEmp(id:number)
   {
     alert("");
-    return this.httpClient.delete(environment.apiUrl+"api/empc/"+id);
+    return this.httpClient.delete(environment.apiUrl+"/api/empc/"+id);
   }
 
   bindListEmployees(){
@@ -33,6 +35,42 @@ export class EmployeeService {
       }
     )
   }
+
+
+
+  
+  bindListDepartments(){
+    this.httpClient.get(environment.apiUrl+'/api/dep')
+    .toPromise().then(
+      response=>{
+       
+        
+        this.departments= response as DepartmentCls[];
+        console.log(this.departments);
+      }
+    )
+  }
+
+
+  getEmployee(id:number):Observable<any>
+  {
+    alert("");
+    return this.httpClient.get(environment.apiUrl+"/api/empc/"+id);
+  }
+
+  insertEmployee(employee:Employee):Observable<any>
+  {
+    alert(environment.apiUrl+"api/empc");
+    return this.httpClient.post(environment.apiUrl+"/api/empc",employee);
+  }
+
+  updateEmployee(employee:Employee):Observable<any>
+  {
+    alert("");
+    return this.httpClient.put(environment.apiUrl+"/api/empc",employee);
+  }
+
+
 }
 
 

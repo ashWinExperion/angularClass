@@ -13,7 +13,8 @@
                 <th>Full Name</th>
                 <th>Designation</th>
                 <th>Join Date</th>
-                <th>Action</th>
+                <th>DepartID</th>
+                <th>Is Active</th>
             </tr>
         </thead>
         <tbody>
@@ -21,9 +22,9 @@
                 <td>{{emp.EmployeeId}}</td>
                 <td>{{emp.EmployeeName}}</td>
                 <td>{{emp.Designation}}</td>
-                <td>{{emp.DateOfJoining}}</td>
-                <td>{{emp.Contact}}</td>
-                <td>{{emp.Department}}</td>
+                <td>{{emp.DateOfJoin |date}}</td>
+                <td>{{emp.DepartmentId}}</td>
+                <td>{{emp.IsActive}}</td>
                 <td>
                     <button (click)="updateEmp(emp.EmployeeId)" class="btn btn-sm btn-primary">Edit</button>
                     <button  (click)="deleteEmp(emp.EmployeeId)"  class="btn btn-sm btn-danger">X</button>

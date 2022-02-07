@@ -10,7 +10,15 @@ export class AuthGuard implements CanActivate {
   constructor(private router:Router){}
   canActivate(next: ActivatedRouteSnapshot):boolean{
     //check role
-      return true;
+    const expectedRole=next.data.role;
+    const currentRole=localStorage.getItem("USERROLE");
+    alert(currentRole);
+    alert(expectedRole);
+    if(currentRole!==expectedRole)
+    {
+      this.router.navigateByUrl("/");
+    }
+    return true;
   }
   
 }

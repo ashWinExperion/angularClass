@@ -17,7 +17,7 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { RouterModule } from '@angular/router';
-import {AuthGuard} from './shared/auth.guard'
+import {AuthGuard} from './shared/auth.guard';
 
 @NgModule({
   declarations: [

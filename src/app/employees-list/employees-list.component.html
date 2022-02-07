@@ -1,0 +1,36 @@
+<div class="container">
+    <div class="header">
+        <div class="from-control">
+            <!-- Saerch Func -->
+            <input type="text" [(ngModel)]="filter" class="form-control" placeholder="Serach text Here">
+        </div>
+        <a [routerLink]="" style="float: right;" class="btn btn-primary">Add Employee</a>
+    </div>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Full Name</th>
+                <th>Designation</th>
+                <th>Join Date</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let emp of employeeService.employess | filter:filter| paginate:{itemsPerPage:2,currentPage:page}">
+                <td>{{emp.EmployeeId}}</td>
+                <td>{{emp.EmployeeName}}</td>
+                <td>{{emp.Designation}}</td>
+                <td>{{emp.DateOfJoining}}</td>
+                <td>{{emp.Contact}}</td>
+                <td>{{emp.Department}}</td>
+                <td>
+                    <button (click)="updateEmp(emp.EmployeeId)" class="btn btn-sm btn-primary">Edit</button>
+                    <button  (click)="deleteEmp(emp.EmployeeId)"  class="btn btn-sm btn-danger">X</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<pagination-controls (pageChange)="page = $event"></pagination-controls>

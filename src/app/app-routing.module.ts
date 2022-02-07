@@ -6,6 +6,7 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { ManagerComponent } from './manager/manager.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { AuthGuard } from './shared/auth.guard';
 
 const routes: Routes = [
 
@@ -13,7 +14,7 @@ const routes: Routes = [
   {path:'home',component:HomeComponent},
   {path:'employee',component:EmployeesListComponent},
   {path:'login',component:LoginComponent},
-  {path:'admin',component:AdminComponent},
+  {path:'admin',component:AdminComponent,canActivate:[AuthGuard],data:{role:1}},
   {path:'manager',component:ManagerComponent},
   {path:'**',component:PageNotFoundComponent}
 ];

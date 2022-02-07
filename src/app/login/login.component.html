@@ -6,7 +6,7 @@
         <form [formGroup]="loginForm" (ngSubmit)="loginCredentials()">
             <div>
                 <p>
-                    <input name="UserName" required minlength="5" class="form-control" 
+                    <input name="UserName" autocomplete="off" required minlength="5" class="form-control" 
                     [ngClass]="{'is-invalid': formControls.UserName.touched && formControls.UserName.invalid}" type="text" formControlName="UserName" placeholder="userName">
                 </p>
             </div>
@@ -20,7 +20,7 @@
             
             <div>
                 <p>
-                    <input class="form-control" name="UserPassword" 
+                    <input class="form-control" autocomplete="off" name="UserPassword" 
                     [ngClass]="{'is-invalid': formControls.UserPassword.touched && formControls.UserPassword.invalid}" type="text" formControlName="UserPassword" placeholder="Password">
                 </p>
             </div>

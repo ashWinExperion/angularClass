@@ -48,25 +48,30 @@ import {AuthServiceService} from "../shared/auth-service.service"
           this.authService.loginVerify(this.loginForm.value).subscribe(data=>{
             console.log(data);
             this.loginUser=data;
-            if(this.loginUser!=null)
+           
+            alert(this.loginUser.RoleId);
+            if(this.loginUser.RoleId==1)
             {
               localStorage.setItem('USERNAME',this.loginUser.UserName);
               localStorage.setItem('USERROLE',this.loginUser.RoleId);
               sessionStorage.setItem('USERNAME',this.loginUser.UserName);
 
-            }
-            alert(this.loginUser.RoleId);
-            if(this.loginUser.RoleId==1)
-            {
-              
               this.router.navigateByUrl('/admin');
             }
             else if(this.loginUser.RoleId==2)
             {
+              localStorage.setItem('USERNAME',this.loginUser.UserName);
+              localStorage.setItem('USERROLE',this.loginUser.RoleId);
+              sessionStorage.setItem('USERNAME',this.loginUser.UserName);
+              
               this.router.navigateByUrl('/manager');
             }
             else
             {
+              localStorage.setItem('USERNAME',this.loginUser.UserName);
+              localStorage.setItem('USERROLE',this.loginUser.RoleId);
+              sessionStorage.setItem('USERNAME',this.loginUser.UserName);
+              
               this.router.navigateByUrl('/home');
             }
           },

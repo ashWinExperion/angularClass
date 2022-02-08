@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Route, Router } from '@angular/router';
 import { EmployeeService } from '../shared/employee.service';
 
 @Component({
@@ -11,7 +12,8 @@ export class EmployeesListComponent implements OnInit {
   page:number =1;
   filter:string;
   
-  constructor(public employeeService : EmployeeService) { }
+  constructor(public employeeService : EmployeeService,
+    private router:Router) { }
 
   ngOnInit(): void { //Life Cycle Hook
     
@@ -35,6 +37,7 @@ export class EmployeesListComponent implements OnInit {
 
   updateEmp(id:number){
     alert(id);
+    this.router.navigate(['emp',id])
   }
 
   deleteEmp(id:number)

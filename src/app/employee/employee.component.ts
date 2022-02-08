@@ -1,6 +1,10 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { ActivatedRoute, Router, Routes } from '@angular/router';
+import { from } from 'rxjs';
 import { EmployeeService } from '../shared/employee.service';
+import { ToastrModule } from 'ngx-toastr';
 
 @Component({
   selector: 'app-employee',
@@ -8,17 +12,48 @@ import { EmployeeService } from '../shared/employee.service';
   styleUrls: ['./employee.component.scss']
 })
 export class EmployeeComponent implements OnInit {
-
-  constructor(public empService: EmployeeService) { }
+ 
+  empId:number;
+  constructor(public empService: EmployeeService,
+    private route:ActivatedRoute,
+    private toastService:ToastrModule) { }
 
   ngOnInit(): void {
     this.empService.bindListDepartments();
+    this.empId=this.route.snapshot.params['id'];
+   
+    if(this.empId!=0 || this.empId!=null)
+    {
+      
+      this.empService.bindEmployee(this.empId).subscribe(result=>{
+        console.log(result);
+        var datePipe = new DatePipe("en-UK");
+        let formatedDate=datePipe.transform(result.DateOfJoin,'yyyy-MM-dd');
+        result.DateOfJoin=formatedDate;
+        this.empService.formData=Object.assign({},result);
+      });
+    
+    }
   }
 
   insertEmpRecord(form?:NgForm){
     this.empService.insertEmployee(form.value).subscribe((result)=>
       {
         alert("");
+        console.log(result);
+        
+        alert("Inserted Succefully..!!");
+      }
+      )
+  }
+
+
+
+  updateEmpRecord(form?:NgForm){
+    this.empService.updateEmployee(form.value)
+    .subscribe((result)=>
+      {
+        alert("Update");
         console.log(result);
       }
       )
@@ -34,11 +69,18 @@ export class EmployeeComponent implements OnInit {
     }
     else
     {
-
+          this.updateEmpRecord(form);
+          this.resetForm();
     }
     //Insert or Update
   }
 
-
+  resetForm(form?:NgForm)
+  {
+    if(form!=null)
+    {
+      form.resetForm();
+    }
+  }
 
 }

@@ -18,7 +18,9 @@ import { LoginComponent } from './login/login.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { RouterModule } from '@angular/router';
 import {AuthGuard} from './shared/auth.guard';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
+ 
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,7 +41,9 @@ import {AuthGuard} from './shared/auth.guard';
     Ng2SearchPipeModule,
     FormsModule,
     RouterModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule, // required animations module
+    ToastrModule // ToastrModule added
   ],
   providers: [EmployeeService,AuthGuard],
   bootstrap: [AppComponent]

@@ -12,6 +12,7 @@ import {DepartmentCls} from './departmentCls'
 export class EmployeeService {
 
   employess:Employee[];
+  employee:Employee;
   departments:DepartmentCls[];
   formData: Employee=new Employee();
   constructor(private httpClient:HttpClient) { }
@@ -39,17 +40,26 @@ export class EmployeeService {
 
 
   
+   
+  bindEmployee(id):Observable<any>{
+    return this.httpClient.get(environment.apiUrl+"/api/empc/"+id);
+  }
+
+
+  
   bindListDepartments(){
     this.httpClient.get(environment.apiUrl+'/api/dep')
     .toPromise().then(
       response=>{
-       
-        
-        this.departments= response as DepartmentCls[];
+  this.departments= response as DepartmentCls[];
         console.log(this.departments);
       }
     )
   }
+
+
+
+
 
 
   getEmployee(id:number):Observable<any>
